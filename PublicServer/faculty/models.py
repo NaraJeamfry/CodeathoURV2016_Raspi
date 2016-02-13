@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
-from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
 
-from ..supervision.models import Campus, Faculty, Zone, Classroom
+from supervision.models import Campus, Faculty, Zone, Classroom
+from bookings.models import Booking
 
 class Professor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -16,7 +16,11 @@ class Professor(models.Model):
     # - email: el correu electrònic de l'usuari
 
     access_campus = models.ManyToManyField(Campus)
-    bookings = models.ManyToManyField(Classroom, through='booking.Booking')
+    bookings = models.ManyToManyField(Classroom, through=Booking)
+
+    class Meta:
+        verbose_name = "professor"
+        verbose_name_plural = "professors"
 
 
 

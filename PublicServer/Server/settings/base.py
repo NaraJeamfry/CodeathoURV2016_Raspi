@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bookings',
+    'configuration',
+    'faculty',
+    'supervision',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -59,7 +63,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Serverl.urls'
+ROOT_URLCONF = 'Server.urls'
 
 TEMPLATES = [
     {
@@ -77,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Serverl.wsgi.application'
+WSGI_APPLICATION = 'Server.wsgi.application'
 
 
 # Database
@@ -135,3 +139,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
