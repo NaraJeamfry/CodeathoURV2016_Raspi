@@ -23,3 +23,12 @@ mòduls de l'aplicació.
 Els controladors oferits per Raspi en aquest prototip es desenvolupen en Python i utilitzen llibreries GPIO de RPi per
 connectar-se al hardware. Raspi està pensat per suportar qualsevol tipus de controladors, i, per tant, oferir un camí
 d'actualitzacions i millores futures molt flexible.
+
+# Detalls de la implementació
+La implementació actual està dissenyada per a ser ràpida de programar i flexible. Alguns detalls no estan del tot
+decidits ni implementats; aquí exposem els principals.
+
+## Usuaris
+Els usuaris de la plataforma són usuaris de Django, extrets de la base de dades directament. En una implementació en la
+URV, s'utilitzarien els usuaris dels servidors de la URV. Aquesta funcionalitat no està previsat però es pot implementar
+ràpidament mitjançant l'autenticació customitzada de Django i un model d'usuaris customitzat.
