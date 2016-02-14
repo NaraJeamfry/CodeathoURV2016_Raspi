@@ -35,9 +35,9 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"></li>
-                <li></li>
-                <li></li>
+                <li {% block booking_classes %}{% endblock %}><a href="{% url 'bookings:home' %}">Reserva</a></li>
+                <li {% block supervision_classes %}{% endblock %}><a href="{% url 'supervision:home' %}">Manteniment</a></li>
+                <li><a href="/admin">Configuració</a></li>
             </ul>
         </div>
     </div>
