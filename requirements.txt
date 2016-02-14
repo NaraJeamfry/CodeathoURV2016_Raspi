@@ -1,2 +1,4 @@
+braces
 django==1.9
 psycopg2
+django-widget-tweaks

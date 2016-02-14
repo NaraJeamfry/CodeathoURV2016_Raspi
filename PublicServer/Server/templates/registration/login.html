@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load widget_tweaks %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<div class="container">
+
+    <form method="post" action="{% url 'django.contrib.auth.views.login' %}" class="form-signin">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Inici de sessió</h2>
+        <label for="{{ form.username.id_for_label }}" class="sr-only">Nom d'usuari:</label>
+        {{ form.username|add_class:"form-control"|attr:"placeholder:Nom d'usuari" }}
+        <label for="{{ form.password.id_for_label }}" class="sr-only">Contrassenya:</label>
+        {{ form.password|add_class:"form-control"|attr:"placeholder:Contrassenya" }}
+        <!-- <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div> -->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+</div>
+
+{% endblock %}

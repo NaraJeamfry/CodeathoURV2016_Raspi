@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load staticfiles %}
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Raspi{% endblock %} </title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -29,7 +32,7 @@
                 <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{% block brand_logo %}{% url 'home' %}{% endblock %}">
-                {% block brand_html %}Raspi{% endblock %}
+                {% block brand_html %}<img height="" src="{% static 'img/logo.png' %}">{% endblock %}
             </a>
         </div>
 
@@ -45,6 +48,9 @@
 {% endblock %}
 
 <!-- Contents -->
+{% block content %}
+Home page!
+{% endblock %}
 
 </body>
 </html>
