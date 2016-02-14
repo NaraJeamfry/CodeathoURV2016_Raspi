@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="../..">{{ object.faculty.campus.name }}</a></li>
+            <li><a href="..">{{ object.faculty.name }}</a></li>
+            <li class="active">{{ object.name }}</li>
+        </ol>
+
+        <h3>{{ object.name }} ({{ object.faculty.name }})</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <tr>
+                        <td>Campus</td>
+                        <td>{{ object.faculty.campus.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Centre</td>
+                        <td>{{ object.faculty.name }}</td>
+                    </tr>
+                </table>
+
+                <ul class="list-group">
+                    {% for classroom in object.classroom_set.all %}
+                    <a class="list-group-item" href="{{ classroom.name }}">{{ classroom.name }}</a>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

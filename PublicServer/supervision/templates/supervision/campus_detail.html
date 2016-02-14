@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="active">{{ object.name }}</li>
+        </ol>
+
+        <h3>{{ object.name }}</h3>
+        <div class="row">
+            <table class="table">
+                <tr>
+                    {% if object.director %}
+                    <td>Director</td>
+                    <td>{{ object.director.last_name }}, {{ object.director.first_name }}</td>
+                    {% endif %}
+                </tr>
+            </table>
+
+            <div class="col-md-12">
+                <ul class="list-group">
+                    {% for faculty in object.faculty_set.all %}
+                    <a class="list-group-item" href="{{ faculty.name }}">{{ faculty.name }}</a>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,20 +1,28 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block content %}
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="../../..">{{ object.zone.faculty.campus.name }}</a></li>
+            <li><a href="../..">{{ object.zone.faculty.name }}</a></li>
+            <li><a href="..">{{ object.zone.name }}</a></li>
+            <li class="active">{{ object.name }}</li>
+        </ol>
 
-    <h1>Aula {{ object.name }}</h1>
-
-    <div class="content">
+        <h3>Aula {{ object.name }}</h3>
         <div class="row">
             <div class="col-md-3">
                 {% if object.photo %}
-                    <img src="{{ object.photo.url }}" width="100%">
+                    <img class="img-rounded" src="{{ object.photo.url }}" width="100%" title="Aula {{ object.name }}">
                 {% else %}
-
+                    <img class="img-rounded" src="{% static 'img/classroom.png' %}" width="100%" title="Aula {{ object.name }}"
+                        alt="Aula {{ object.name }}">
                 {% endif %}
             </div>
-            <div class="col-md-9">
-                <table>
+            <div class="col-md-6">
+                <table class="table">
                     <tr>
                         <td>Campus</td>
                         <td>{{ object.zone.faculty.campus.name }}</td>
@@ -27,7 +35,18 @@
                         <td>Zona</td>
                         <td>{{ object.zone.name }}</td>
                     </tr>
+                    {% for property in object.properties.all %}
+                    <tr>
+                        <td>{{ property.display_name }}</td>
+                        <td>Oberta</td>
+                    </tr>
+                    {% endfor %}
                 </table>
+
+                {% for  %}
+                <ul class="list-group">
+                    <li></li>
+                </ul>
             </div>
 
         </div>

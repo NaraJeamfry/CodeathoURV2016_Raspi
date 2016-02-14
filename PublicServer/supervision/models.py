@@ -4,12 +4,14 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+from classroom_server.raspberry import get_status
+
 
 class ClassroomProperties(models.Model):
     name = models.CharField(max_length=24)
     has_count = models.BooleanField()
 
-    display_name = models.CharField(max_length=32, null=True)
+    display_name = models.CharField(max_length=32, blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -78,7 +80,9 @@ class Classroom(models.Model):
     zone = models.ForeignKey(Zone, on_delete=models.CASCADE)
     type = models.CharField(max_length=3, choices=TYPES, default=TEORIA)
 
-    photo = models.ImageField(null=True, default=None)
+    raspberry_pi_ip = models.GenericIPAddressField(blank=True, null=True, default=None)
+
+    photo = models.ImageField(null=True, blank=True, default=None)
 
     properties = models.ManyToManyField(ClassroomProperties)
 
@@ -88,3 +92,11 @@ class Classroom(models.Model):
     class Meta:
         verbose_name = "classroom"
         verbose_name_plural = "classrooms"
+
+    def get_current_status(self):
+        if self.raspberry_pi_ip is None:
+            return {}
+        classroom = {}
+        for property in self.properties.all():
+            status = get_status(self.raspberry_pi_ip, property.name)
+
