@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Aula {{ object.name }}</h1>
+
+    <div class="content">
+        <div class="row">
+            <div class="col-md-3">
+                {% if object.photo %}
+                    <img src="{{ object.photo.url }}" width="100%">
+                {% else %}
+
+                {% endif %}
+            </div>
+            <div class="col-md-9">
+                <table>
+                    <tr>
+                        <td>Campus</td>
+                        <td>{{ object.zone.faculty.campus.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Centre</td>
+                        <td>{{ object.zone.faculty.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Zona</td>
+                        <td>{{ object.zone.name }}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

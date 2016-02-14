@@ -9,6 +9,8 @@ class ClassroomProperties(models.Model):
     name = models.CharField(max_length=24)
     has_count = models.BooleanField()
 
+    display_name = models.CharField(max_length=32, null=True)
+
     def __unicode__(self):
         return self.name
 
@@ -18,9 +20,9 @@ class ClassroomProperties(models.Model):
 
 
 class Campus(models.Model):
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=32, unique=True)
     address = models.CharField(max_length=128)
-    director = models.ForeignKey(User)
+    director = models.ForeignKey(User, null=True)
 
     def __unicode__(self):
         return self.name
@@ -33,7 +35,7 @@ class Campus(models.Model):
 class Faculty(models.Model):
     name = models.CharField(max_length=32)
     campus = models.ForeignKey(Campus, on_delete=models.CASCADE)
-    director = models.ForeignKey(User)
+    director = models.ForeignKey(User, null=True)
 
     def __unicode__(self):
         return self.name
@@ -75,6 +77,8 @@ class Classroom(models.Model):
 
     zone = models.ForeignKey(Zone, on_delete=models.CASCADE)
     type = models.CharField(max_length=3, choices=TYPES, default=TEORIA)
+
+    photo = models.ImageField(null=True, default=None)
 
     properties = models.ManyToManyField(ClassroomProperties)
 
