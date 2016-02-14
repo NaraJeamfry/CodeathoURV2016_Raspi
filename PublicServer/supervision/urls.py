@@ -4,11 +4,11 @@ from django.conf.urls import url
 from django.views.generic import TemplateView
 
 from Server.views import HomeView
-from .views import ClassroomDetails, ZoneDetails, FacultyDetails, CampusDetails
+from .views import ClassroomDetails, ZoneDetails, FacultyDetails, CampusDetails, ListCampus
 
 urlpatterns = [
-    url(r'^$', HomeView.as_view(), name='home'),
-    #url(r'^$', ListCampus.as_view(), name='home'),
+    #url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^$', ListCampus.as_view(), name='home'),
 
     url(r'^(?P<campus>\w+)/$', CampusDetails.as_view(), name='campus'),
 

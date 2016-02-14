@@ -4,16 +4,21 @@ from __future__ import unicode_literals
 
 import datetime
 
+from django.db.models import F
 from django.http import Http404
 from django.shortcuts import render
 
 from django.core.exceptions import ObjectDoesNotExist
 
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 from .models import Classroom, Zone, Faculty, Campus
 
 from bookings.models import TimeFrame, Booking, Frame
+
+
+class ListCampus(ListView):
+    model = Campus
 
 
 class ClassroomDetails(DetailView):
@@ -42,7 +47,6 @@ class ClassroomDetails(DetailView):
         context = super(ClassroomDetails, self).get_context_data(**kwargs)
 
         context['status'] = self.object.get_current_status()
-        context['frames'] = Frame.objects.values('start_hour', 'end_hour', 'timeframe__booking__professor__picture', 'timeframe__booking__professor__user__first_name').filter(timeframe__day=datetime.date.today(), timeframe__booking__classroom=self.object)
 
         return context
 

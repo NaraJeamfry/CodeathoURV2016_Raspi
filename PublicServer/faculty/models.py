@@ -18,7 +18,7 @@ class Professor(models.Model):
     access_campus = models.ManyToManyField(Campus)
     bookings = models.ManyToManyField(Classroom, through=Booking)
 
-    picture = models.ImageField(null=True, default=None)
+    picture = models.ImageField(null=True, default=None, blank=True)
 
     class Meta:
         verbose_name = "professor"

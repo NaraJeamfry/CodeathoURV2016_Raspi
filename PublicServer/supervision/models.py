@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
-from classroom_server.raspberry import get_status
+from classroom_server.raspberry import get_status, test_connection
 
 
 class ClassroomProperties(models.Model):
@@ -19,6 +19,7 @@ class ClassroomProperties(models.Model):
     class Meta:
         verbose_name = "property"
         verbose_name_plural = "properties"
+        ordering = ['name']
 
 
 class Campus(models.Model):
@@ -32,6 +33,7 @@ class Campus(models.Model):
     class Meta:
         verbose_name = "campus"
         verbose_name_plural = "campuses"
+        ordering = ['name']
 
 
 class Faculty(models.Model):
@@ -45,6 +47,7 @@ class Faculty(models.Model):
     class Meta:
         verbose_name = "faculty"
         verbose_name_plural = "faculties"
+        ordering = ['name']
 
 
 class Zone(models.Model):
@@ -57,6 +60,7 @@ class Zone(models.Model):
     class Meta:
         verbose_name = "zone"
         verbose_name_plural = "zones"
+        ordering = ['name']
 
 
 class Classroom(models.Model):
@@ -92,11 +96,23 @@ class Classroom(models.Model):
     class Meta:
         verbose_name = "classroom"
         verbose_name_plural = "classrooms"
+        ordering = ['name']
 
     def get_current_status(self):
         if self.raspberry_pi_ip is None:
-            return {}
+            return {"Raspberry": "No configurat"}
         classroom = {}
+
+        can_connect = test_connection(self.raspberry_pi_ip)
+
+        if not can_connect:
+            return {"Raspberry": "APAGAT"}
+        else:
+            classroom = {"Raspberry": "CONNECTAT"}
+
         for property in self.properties.all():
             status = get_status(self.raspberry_pi_ip, property.name)
+            classroom.update({property: status})
+
+        return classroom
 

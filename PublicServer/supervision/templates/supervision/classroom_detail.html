@@ -35,17 +35,24 @@
                         <td>Zona</td>
                         <td>{{ object.zone.name }}</td>
                     </tr>
-                    {% for property in object.properties.all %}
+                    {% for property, status in status.items %}
                     <tr>
-                        <td>{{ property.display_name }}</td>
-                        <td>Oberta</td>
+                        <td>{{ property }}</td>
+                        <td>{{ status }}</td>
                     </tr>
                     {% endfor %}
                 </table>
-
+            </div>
+            <div class="col-md-3">
                 {% for timeframe in frames %}
                 <ul class="list-group">
-                    <li></li>
+                    <li class="list-group-item">
+                        <div class="pull-right">
+                            <img title="{{ timeframe.professor_name }}" src="{{ timeframe.professor_picture.url }}"
+                                 width="30" height="30">
+                        </div>
+                        {{ timeframe.start_hour }} - {{ timeframe.end_hour }}<br>
+                    </li>
                 </ul>
                 {% endfor %}
             </div>
